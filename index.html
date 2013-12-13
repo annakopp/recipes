@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html>
   <head>
-	  <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/freebase/suggest/4_2/suggest.min.css" />
+	<link href='http://fonts.googleapis.com/css?family=Signika+Negative:400,700' rel='stylesheet' type='text/css'>
+	<link type="text/css" rel="stylesheet" href="https://www.gstatic.com/freebase/suggest/4_2/suggest.min.css" />
+	<link type="text/css" rel="stylesheet" href="style.css" />
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 	<script src="http://code.jquery.com/jquery-migrate-1.2.1.js"></script>
 	<script type="text/javascript" src="https://www.gstatic.com/freebase/suggest/4_2/suggest.min.js"></script>
@@ -9,16 +11,17 @@
   </head>
   <body>
 	  
-	 
-	 <div class="sidebar">
-	 	<input type="text" id="myinput"/><button id="add">Add</button>
-		<ul class="ing-list">
-		</ul>
-	 </div>
-	 
 	 <div class="main">
- 		<ul class="recipe-list">
- 		</ul>
+		 <aside>
+		 	<input type="text" id="myinput" placeholder="Type an ingredient"/>
+			<ul class="ing-list">
+			</ul>
+		 </aside>
+	 
+		 <article>
+	 		<ul class="recipe-list">
+	 		</ul>
+		</article>
 	</div>
   </body>
 </html>

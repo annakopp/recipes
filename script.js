@@ -1,4 +1,5 @@
 $(document).ready(function() {
+	$("#myinput").focus();
 	var ingredients = [];
 	
 	var search = function(){
@@ -37,12 +38,19 @@ $(document).ready(function() {
 	});
 
 
-	$("#add").click(function(){
-		ingredients.push($("#myinput").val());
-		var ingToAdd = "<li>" + $("#myinput").val() + " <button class='remove' data-id='"+$("#myinput").val()+"'>Remove</button></li>"
-	 	$(".ing-list").append(ingToAdd);
-		$("#myinput").val("");
-		search();
+	$("#myinput").on("keypress", function(event){
+		if (event.keyCode == 13) {
+			ingredients.push($("#myinput").val());
+			var ingToAdd = "<li>" + $("#myinput").val() + " <button class='remove' data-id='"+$("#myinput").val()+"'>Remove</button></li>"
+		 	$(".ing-list").append(ingToAdd);
+			
+			//reset the input field
+			$("#myinput").blur();
+			$("#myinput").val("");
+			$("#myinput").focus();
+			
+			search();
+		};
 	})
 	
 	$(".ing-list").on("click", ".remove", function(event){
