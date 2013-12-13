@@ -5,6 +5,33 @@ html, body, aside, article, input, ul, li, button, a, p, h1, h2 , h3, div {
 	font-size: 100%;
 }
 
+ul {
+	list-style: none;
+}
+
+.ing-list > li {
+	padding: 0 5px;
+	float: left;
+}
+
 .main {
 	padding: 50px;
+	width: 600px;
+	margin: auto;
+}
+
+.group:after {
+	content: "";
+	display: table;
+	clear: both;
+}
+
+.recipe {
+	float: right;
+	width: 300px;
+}
+
+.sidebar {
+	float: left;
+	width: 300px;
 }

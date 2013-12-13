@@ -3,30 +3,38 @@ $(document).ready(function() {
 	var ingredients = [];
 	
 	var search = function(){
-		
-		$(".recipe-list").empty();
+		if (ingredients.length != 0) {
+			$(".recipe-list").empty();
   
-	  	var basicQuery = {
-							"type": "/food/recipe",
-				  		  	"name": null,
-							"sort":"name"
-						 }
+		  	var basicQuery = {
+								"type": "/food/recipe",
+					  		  	"name": null,
+								"id": null,
+								"sort":"name"
+							 }
 					 
-		$.each(ingredients, function(i, ingredient){
-			var and = String.fromCharCode(i+97);
-			var newIngredient = and + ":ingredients";
-			basicQuery[newIngredient] = [{"ingredient": ingredient}];
-		});
+			$.each(ingredients, function(i, ingredient){
+				var and = String.fromCharCode(i+97);
+				var newIngredient = and + ":ingredients";
+				basicQuery[newIngredient] = [{"ingredient": ingredient}];
+			});
 		
-		var query = [basicQuery];
+			var query = [basicQuery];
 				 
-	  	var service_url = 'https://www.googleapis.com/freebase/v1/mqlread';
+		  	var service_url = 'https://www.googleapis.com/freebase/v1/mqlread';
 		
-	 	$.getJSON(service_url + '?callback=?', {query:JSON.stringify(query)},function(response) {
-	   		$.each(response.result, function(i,recipe){
-	     		$(".recipe-list").append("<li>" + recipe.name + "</li>");
-	   	 	});
-	  	});
+		 	$.getJSON(service_url + '?callback=?', {query:JSON.stringify(query)},function(response) {
+				if (response.result.length != 0) {
+			   		$.each(response.result, function(i,recipe){
+			     		$(".recipe-list").append("<li><a href='#' data-id='"+recipe.id+"'>" + recipe.name + "</a></li>");
+			   	 	});
+				} else{
+					$(".recipe-list").html("<li>None</li>")
+				}
+		  	});
+		} else {
+			$(".recipe-list").html("<li>None</li>")
+		}
 	}
 
 	//autocomplete recipe search
@@ -41,7 +49,7 @@ $(document).ready(function() {
 	$("#myinput").on("keypress", function(event){
 		if (event.keyCode == 13) {
 			ingredients.push($("#myinput").val());
-			var ingToAdd = "<li>" + $("#myinput").val() + " <button class='remove' data-id='"+$("#myinput").val()+"'>Remove</button></li>"
+			var ingToAdd = "<li>" + $("#myinput").val() + " <button class='remove' data-id='"+$("#myinput").val()+"'>X</button></li>"
 		 	$(".ing-list").append(ingToAdd);
 			
 			//reset the input field
@@ -61,6 +69,23 @@ $(document).ready(function() {
 		ingredients.splice(index,1);
 		console.log(ingredients);
 		search();
+	})
+	
+	$(".recipe-list").on("click", "a", function(event){
+		var id = $(event.currentTarget).data("id");
+		var query = {
+  		  				"id": id,
+ 					   	"name": null,
+  					  	"type":"/common/topic",
+						"description": null
+					}
+		
+	  	var service_url = 'https://www.googleapis.com/freebase/v1/mqlread';
+
+		//freebase descriptions are under topic, not recipe
+	 	$.getJSON(service_url + '?callback=?', {query:JSON.stringify(query)},function(response) {
+			$(".recipe").html(response.result.description);
+	  	});
 	})
 	
 });
