@@ -36,15 +36,9 @@ ul {
 }
 
 .recipe {
-	float: right;
-	width: 400px;
+	display: none;
 	padding: 10px;
-}
-
-.sidebar {
-	float: left;
-	width: 400px;
-
+	text-align: left;
 }
 
 .ingredients {
@@ -54,10 +48,12 @@ ul {
 }
 
 .recipes {
-	padding: 10px;
+	width: 100%;
+	padding: 10px; 
 	border-radius: 10px;
 	background-color: #BD4932;
 	font-size: 20px;
+	text-align: center;
 }
 
 .recipes a{

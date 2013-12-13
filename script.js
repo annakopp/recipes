@@ -26,7 +26,7 @@ $(document).ready(function() {
 		 	$.getJSON(service_url + '?callback=?', {query:JSON.stringify(query)},function(response) {
 				if (response.result.length != 0) {
 			   		$.each(response.result, function(i,recipe){
-			     		$(".recipe-list").append("<li><a href='#' data-id='"+recipe.id+"'>" + recipe.name + "</a></li>");
+			     		$(".recipe-list").append("<li><a href='#' class='recipe-link' data-id='"+recipe.id+"'>" + recipe.name + "</a></li>");
 			   	 	});
 				} else{
 					$(".recipe-list").html("<li>None</li>")
@@ -86,7 +86,13 @@ $(document).ready(function() {
 
 		
 	 	$.getJSON(service_url + '?callback=?', {query:JSON.stringify(query)},function(response) {
-			$(".recipe").html(response.result.description);
+			
+			$(".recipe").remove();
+		
+			$("<li class='recipe'>"+response.result.description+"</li>").insertAfter(".recipe-link[data-id='"+id+"']");
+			$(".recipe").slideToggle( "slow" );
+
+			
 	  	});
 	})
 	
