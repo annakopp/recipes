@@ -3,6 +3,15 @@ html, body, aside, article, input, ul, li, button, a, p, h1, h2 , h3, div {
 	padding: 0;
 	font-family: 'Signika Negative', sans-serif;
 	font-size: 100%;
+	line-height: 100%;
+}
+
+body {
+	background-color: #ecf0f1;
+}
+
+h2 {
+	font-size: 30px;
 }
 
 ul {
@@ -16,7 +25,7 @@ ul {
 
 .main {
 	padding: 50px;
-	width: 600px;
+	width: 900px;
 	margin: auto;
 }
 
@@ -28,10 +37,90 @@ ul {
 
 .recipe {
 	float: right;
-	width: 300px;
+	width: 400px;
+	padding: 10px;
 }
 
 .sidebar {
 	float: left;
-	width: 300px;
+	width: 400px;
+
+}
+
+.ingredients {
+	padding: 10px;
+	width: 100%;
+	font-size: 20px;
+}
+
+.recipes {
+	padding: 10px;
+	border-radius: 10px;
+	background-color: #BD4932;
+	font-size: 20px;
+}
+
+.recipes a{
+	display: block;
+	text-decoration: none;
+	padding: 10px 0;
+	color: white;
+}
+
+.recipes a:hover {
+	color: #34495e;
+}
+
+.search-bar {
+	padding: 0 0 10px 0;
+}
+
+#myinput {
+	background-color: white;
+	width: 100%;
+	border: 5px solid #105B63;
+	outline: none;
+	padding: 10px;
+	border-radius: 10px;
+	-webkit-box-shadow:0 0 10px #105B63; 
+	-moz-box-shadow:0 0 10px #105B63; 
+	box-shadow:0 0 10px #105B63;
+	font-size: 25px;
+}
+
+.remove {
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #79bbff), color-stop(1, #378de5) );
+	background:-moz-linear-gradient( center top, #79bbff 5%, #378de5 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#79bbff', endColorstr='#378de5');
+	background-color:#79bbff;
+	-webkit-border-top-left-radius:5px;
+	-moz-border-radius-topleft:5px;
+	border-top-left-radius:5px;
+	-webkit-border-top-right-radius:5px;
+	-moz-border-radius-topright:5px;
+	border-top-right-radius:5px;
+	-webkit-border-bottom-right-radius:5px;
+	-moz-border-radius-bottomright:5px;
+	border-bottom-right-radius:5px;
+	-webkit-border-bottom-left-radius:5px;
+	-moz-border-radius-bottomleft:5px;
+	border-bottom-left-radius:5px;
+	text-indent:0px;
+	border:2px solid #84bbf3;
+	display:inline-block;
+	color:#ffffff;
+	font-size:12px;
+	font-weight:normal;
+	font-style:normal;
+	height:20px;
+	line-height:20px;
+	width:20px;
+	text-decoration:none;
+	text-align:center;
+}
+.remove:hover {
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #378de5), color-stop(1, #79bbff) );
+	background:-moz-linear-gradient( center top, #378de5 5%, #79bbff 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#378de5', endColorstr='#79bbff');
+	background-color:#378de5;
 }

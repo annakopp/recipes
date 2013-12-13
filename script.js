@@ -73,6 +73,8 @@ $(document).ready(function() {
 	
 	$(".recipe-list").on("click", "a", function(event){
 		var id = $(event.currentTarget).data("id");
+		
+		//freebase descriptions are under topic, not recipe
 		var query = {
   		  				"id": id,
  					   	"name": null,
@@ -82,7 +84,7 @@ $(document).ready(function() {
 		
 	  	var service_url = 'https://www.googleapis.com/freebase/v1/mqlread';
 
-		//freebase descriptions are under topic, not recipe
+		
 	 	$.getJSON(service_url + '?callback=?', {query:JSON.stringify(query)},function(response) {
 			$(".recipe").html(response.result.description);
 	  	});
