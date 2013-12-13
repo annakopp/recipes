@@ -1,32 +1,8 @@
 $(document).ready(function() {
 	var ingredients = [];
-
-	//autocomplete recipe search
-	$(function() {
-		$("#myinput").suggest({
-		  key: "AIzaSyCfQ2pS7DT93_YB3InrgXMsH7XvxpZBMrM",
-		  filter:'(all type:/food/ingredient)'
-		});
-	});
-
-
-	$("#add").click(function(){
-		ingredients.push($("#myinput").val());
-		var ingToAdd = "<li>" + $("#myinput").val() + " <button class='remove' data-id='"+$("#myinput").val()+"'>Remove</button></li>"
-	 	$(".ing-list").append(ingToAdd);
-		$("#myinput").val("");
-	})
 	
-	$(".ing-list").on("click", ".remove", function(event){
-		var $target = $(event.currentTarget)
-		$target.parent().remove();
-		var removedIngredient = $target.data("id")
-		var index = ingredients.indexOf(removedIngredient)
-		ingredients.splice(index,1);
-		console.log(ingredients);
-	})
-
-	$("#search").click(function(){
+	var search = function(){
+		
 		$(".recipe-list").empty();
   
 	  	var basicQuery = {
@@ -50,7 +26,33 @@ $(document).ready(function() {
 	     		$(".recipe-list").append("<li>" + recipe.name + "</li>");
 	   	 	});
 	  	});
-  
+	}
+
+	//autocomplete recipe search
+	$(function() {
+		$("#myinput").suggest({
+		  key: "AIzaSyCfQ2pS7DT93_YB3InrgXMsH7XvxpZBMrM",
+		  filter:'(all type:/food/ingredient)'
+		});
 	});
+
+
+	$("#add").click(function(){
+		ingredients.push($("#myinput").val());
+		var ingToAdd = "<li>" + $("#myinput").val() + " <button class='remove' data-id='"+$("#myinput").val()+"'>Remove</button></li>"
+	 	$(".ing-list").append(ingToAdd);
+		$("#myinput").val("");
+		search();
+	})
+	
+	$(".ing-list").on("click", ".remove", function(event){
+		var $target = $(event.currentTarget)
+		$target.parent().remove();
+		var removedIngredient = $target.data("id")
+		var index = ingredients.indexOf(removedIngredient)
+		ingredients.splice(index,1);
+		console.log(ingredients);
+		search();
+	})
 	
 });
