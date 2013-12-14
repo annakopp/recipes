@@ -81,19 +81,43 @@ $(document).ready(function() {
   					  	"type":"/common/topic",
 						"description": null
 					}
+					
+		var detailsQuery = {
+				  				"id": id,
+						  		"name": null,
+						  		"type": "/food/recipe",
+						  		"ingredients": [{
+						    		"ingredient": null,
+						   		 	"quantity": null,
+						   		 	"unit": null
+  						  		}]
+							}
 		
 	  	var service_url = 'https://www.googleapis.com/freebase/v1/mqlread';
 
 		
 	 	$.getJSON(service_url + '?callback=?', {query:JSON.stringify(query)},function(response) {
+			var instructions = response.result.description
 			
-			$(".recipe").remove();
+			$.getJSON(service_url + '?callback=?', {query:JSON.stringify(detailsQuery)},function(data) {
+				
+				
+				var ingredientList = data.result.ingredients;
+				console.log(ingredientList);
+			
+				$(".recipe").remove();
 		
-			$("<li class='recipe'>"+response.result.description+"</li>").insertAfter(".recipe-link[data-id='"+id+"']");
-			$(".recipe").slideToggle( "slow" );
+				$("<li class='recipe'>"+instructions+"<ul class='recipe-deets'></ul></li>").insertAfter(".recipe-link[data-id='"+id+"']");
+				
+				$.each(ingredientList, function(i, ingredient){
+					$(".recipe-deets").append("<li>"+ ingredient.ingredient+" "+ingredient.quantity+" "+ingredient.unit+"</li>");
+				});
+				
+				$(".recipe").slideToggle( "slow" );
 
 			
-	  	});
-	})
+	  		});
+		});
+	});
 	
 });

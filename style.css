@@ -7,7 +7,7 @@ html, body, aside, article, input, ul, li, button, a, p, h1, h2 , h3, div {
 }
 
 body {
-	background-color: #ecf0f1;
+	background-color: #FFD34E;
 }
 
 h2 {
@@ -25,7 +25,6 @@ ul {
 
 .main {
 	padding: 50px;
-	width: 900px;
 	margin: auto;
 }
 
