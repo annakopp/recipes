@@ -25,9 +25,11 @@ $(document).ready(function() {
 		
 		 	$.getJSON(service_url + '?callback=?', {query:JSON.stringify(query)},function(response) {
 				if (response.result.length != 0) {
-			   		$.each(response.result, function(i,recipe){
-			     		$(".recipe-list").append("<li><a href='#' class='recipe-link' data-id='"+recipe.id+"'>" + recipe.name + "</a></li>");
-			   	 	});
+					var recipeList = "<% _(recipes).each(function(recipe) { %><li><a href='#' class='recipe-link' data-id='<%=recipe.id%>'><%=recipe.name%></a></li> <% }) %>"
+					
+					var compiled = _.template(recipeList, {recipes: response.result})
+					
+					$(".recipe-list").html(compiled)
 				} else{
 					$(".recipe-list").html("<li>None</li>")
 				}
@@ -49,8 +51,11 @@ $(document).ready(function() {
 	$("#myinput").on("keypress", function(event){
 		if (event.keyCode == 13) {
 			ingredients.push($("#myinput").val());
-			var ingToAdd = "<li>" + $("#myinput").val() + " <button class='remove' data-id='"+$("#myinput").val()+"'>X</button></li>"
-		 	$(".ing-list").append(ingToAdd);
+			
+			var ingredientTemplate = "<li><%= ingredient %><button class='remove' data-id='<%= ingredient %>'>X</button></li>"
+			var compiled = _.template(ingredientTemplate, {ingredient: $("#myinput").val()})
+			
+		 	$(".ing-list").append(compiled);
 			
 			//reset the input field
 			$("#myinput").blur();
@@ -74,7 +79,7 @@ $(document).ready(function() {
 	$(".recipe-list").on("click", "a", function(event){
 		var id = $(event.currentTarget).data("id");
 		
-		//freebase descriptions are under topic, not recipe
+		//freebase descriptions are under topic, not recipe, they are not connected so two queries are needed
 		var query = {
   		  				"id": id,
  					   	"name": null,
@@ -101,9 +106,7 @@ $(document).ready(function() {
 			
 			$.getJSON(service_url + '?callback=?', {query:JSON.stringify(detailsQuery)},function(data) {
 				
-				
 				var ingredientList = data.result.ingredients;
-				console.log(ingredientList);
 			
 				$(".recipe").remove();
 		
