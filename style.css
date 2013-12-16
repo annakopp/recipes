@@ -14,6 +14,11 @@ h2 {
 	font-size: 30px;
 }
 
+h3 {
+	font-size: 20px;
+	padding: 10px 0;
+}
+
 ul {
 	list-style: none;
 }
@@ -60,6 +65,7 @@ ul {
 	text-decoration: none;
 	padding: 10px 0;
 	color: white;
+	font-size: 25px;
 }
 
 .recipes a:hover {
@@ -70,8 +76,16 @@ ul {
 	padding: 0 0 10px 0;
 }
 
+.instructions {
+	padding: 0 0 0 10px;
+}
+
 #myinput {
 	background-color: white;
+	background-image: url('images/1387158717_magnifying_glass_alt.png');
+	background-size: 32px 32px;
+	background-repeat: no-repeat;
+	background-position: 99% 50%;
 	width: 100%;
 	border: 5px solid #105B63;
 	outline: none;
@@ -112,6 +126,7 @@ ul {
 	width:20px;
 	text-decoration:none;
 	text-align:center;
+	cursor: pointer;
 }
 .remove:hover {
 	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #378de5), color-stop(1, #79bbff) );
